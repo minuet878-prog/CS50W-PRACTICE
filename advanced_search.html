@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Advanced Search</title>
+        <style>
+            nav {
+                border-bottom: 1px solid rgb(209, 207, 207);
+            }
+            nav img {
+                width: 92px;
+                margin: 10px 20px;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                max-width: 800px;
+                padding: 0 120px;
+                margin: 20px auto;
+            }
+            .content {
+                display: flex;
+                align-items: center;
+                max-width: 700px;
+                flex-wrap: wrap;
+            }
+            .label {
+                width: 250px;
+                font-size: 14px;
+            }
+            .search_parameter,
+            select {
+                flex: 1;
+                height: 40px;
+                min-width: 200px;
+                font-family: Roboto, sans-serif;
+                font-size: 14px;
+                padding: 0 10px;
+            }
+            .title {
+                font-size: 25px;
+            }
+            .subtitle {
+                font-size: 20px;
+            }
+            .search_btn {
+                width: 100px;
+                height: 40px;
+                color: white;
+                border: none;
+                background-color: rgb(54, 100, 240);
+                border-radius: 20px;
+                font-size: 14px;
+                padding: 10px 20px;
+                margin-top: 20px;
+                align-self: flex-end;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
+        </nav>
+        <form action="https://www.google.com/search">
+            <p class="title">進階搜尋</p>
+            <p class="subtitle">尋找符合以下條件的網頁</p>
+            <p class="content">
+                <span class="label">包含以下所有字詞：</span>
+                <input class="search_parameter" name="as_q">
+            </p>
+            <p class="content">
+                <span class="label">完全符合以下字詞或詞組：</span>
+                <input class="search_parameter" name="as_epq">
+            </p>
+            <p class="content">
+                <span class="label">不含以下任何字詞：</span>
+                <input class="search_parameter" name="as_eq">
+            </p>
+            <p class="content">
+                <span class="label">網站或網域：</span>
+                <input class="search_parameter" name="as_sitesearch">
+            </p>
+            <p class="subtitle">然後依以下條件縮小搜尋範圍</p>
+            <p class="content">
+                <span class="label">檔案類型：</span>
+                <select name="as_filetype">
+                    <option value="">不限格式</option>
+                    <option value="pdf">Adobe Acrobat PDF (.pdf)</option>
+                    <option value="ps">Adobe PostScript (.ps)</option>
+                    <option value="dwf">Autodesk DWF (.dwf)</option>
+                </select>
+            </p>
+            <p class="content">
+                <span class="label">上次更新時間：</span>
+                <select name="as_qdr">
+                    <option value="">不限時間</option>
+                    <option value="h">過去 1 小時</option>
+                    <option value="d">過去 24 小時</option>
+                    <option value="w">過去 1 週</option>
+                </select>
+            </p>
+            <p class="content">
+                <span class="label">語言：</span>
+                <select name="lr">
+                    <option value="">不限語言</option>
+                    <option value="lang_zh-TW">繁體中文</option>
+                    <option value="lang_en">英文</option>
+                    <option value="lang_ja">日文</option>
+                </select>
+            </p>
+            <p class="content">
+                <span class="label">區域：</span>
+                <select name="cr">
+                    <option value="">不限區域</option>
+                    <option value="countryBR">巴西</option>
+                    <option value="countryTW">台灣</option>
+                    <option value="countryES">西班牙</option>
+                </select>
+            </p>
+            <p class="content">
+                <span class="label">使用權限：</span>
+                <select name="tbs">
+                    <option value="">不限使用權</option>
+                    <option value="sur:f">可任意使用或分享</option>
+                    <option value="sur:fc">即使是商業用途．亦可任意使用或分享</option>
+                    <option value="sur:fm">可任意使用、分享或修改</option>
+                </select>
+            </p>
+            <input class="search_btn" type="submit" value="進階搜尋">
+        </form>
+    </body>
+</html>
