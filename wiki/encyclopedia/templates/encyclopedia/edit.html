@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Edit Your Page
+{% endblock %}
+
+{% block body %}
+<form action="{% url 'edit' title %}" method="post">
+    {% csrf_token %}
+	<span>Enter Your Title</span>
+    <input type="text" name="title" value="{{ title }}" readonly>
+    <p><label>Enter Your Markdown Content:</label></p>
+    <textarea rows="4" cols="50" name="content">{{ content }}</textarea>
+    <br>
+    <input type="submit" value="Confirm">
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+</form>
+
+{% endblock %}

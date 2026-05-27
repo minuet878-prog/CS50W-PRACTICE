@@ -49,3 +49,15 @@ def create(request):
         else:
             util.save_entry(title, content)
             return redirect(f"/wiki/{title}")
+        
+def edit(request, title):
+    if request.method == "GET":
+        content = util.get_entry(title)
+        return render(request, "encyclopedia/edit.html", {
+            "title": title,
+            "content": content
+        })
+    if request.method == "POST":
+        content = request.POST.get("content")
+        util.save_entry(title, content)
+        return redirect(f"/wiki/{title}")
