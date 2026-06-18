@@ -1,0 +1,88 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    <h2>Listing: {{listing.item|title }}</h2>
+    {% if user == listing.seller %}
+        <form action="{% url 'close_auction' listing.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="background-color: rgb(69, 24, 24); color: white; border: none; padding: 10px 20px; border-radius: 8px;">Close Auction</button>
+        </form>
+    {% endif %}
+    {% if  listing in user.watchlist.all %}
+        <span class="badge badge-secondary">watchlist</span>
+    {% endif %}
+    {% if has_won %}
+        <span>You are the winner!</span>
+    {% elif is_closed %}
+        <span>This auction had been closed</span>
+    {% endif %}
+    <div class="item" style="display: flex; flex-direction: column;">
+        <img src="{{ listing.image }}" style="width: 600px; height: 600px; object-fit: contain;">
+        <p>{{ listing.description }}</p>
+        <h2>${{ current_price }}</h2>
+    </div>
+    <div class="bid" style="display: flex; gap: 10px; align-items: center;">
+        {% if user != listing.seller %}
+            <form action="{% url 'bid' listing.id %}" method="post">
+                {% csrf_token %}
+                <p>{{ bid_count }} bid(s) so far.
+                {% if is_winner %}
+                    Your bid is the current bid.
+                {% endif %}
+                </p>
+                <input type="number" name="bid_price">
+                <button type="submit" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 8px;">Place Bid</button>
+                {% if error %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endif %}
+            </form>
+        {% endif %}
+    </div>
+        {% if listing in user.watchlist.all %}
+            <form action="{% url 'remove' listing.id %}" method="post"> 
+                    {% csrf_token %}
+                    <button type="submit" style="background-color: grey; color: white; border: none; padding: 10px 20px; border-radius: 8px;">Remove from Watchlist</button>
+            </form>
+        {% else %}
+            <form action="{% url 'add' listing.id %}" method="post"> 
+                    {% csrf_token %}
+                    <button type="submit" style="background-color: grey; color: white; border: none; padding: 10px 20px; border-radius: 8px;">Add to Watchlist</button>
+            </form>
+        {% endif %}
+    <div class="detail">
+        <h2>Details</h2>
+        <ul>
+            <li>Listed by: {{ listing.seller }}</li>
+            <li>Category:
+                {% if listing.category %} 
+                    {{ listing.category }}
+                {% else %}
+                    No Category Listed
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+    <div class="comment">
+        <div style="margin-top: 2rem;">
+            <h3>Comments</h3>
+            {% for comment in comments %}
+                <div style="background: #f8f9fa; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <strong style="font-size: 14px;">{{ comment.comment_user }}</strong>
+                        <small style="color: #888;">{{ comment.comment_time }}</small>
+                    </div>
+                    <p style="margin: 0; font-size: 15px;">{{ comment.comment }}</p>
+                </div>
+            {% empty %}
+                <p style="color: #888;">No comments yet.</p>
+            {% endfor %}
+        </div>
+        {% if user != listing.seller %}
+            <form action="{% url 'comment' listing.id %}" method="post" style="margin-top: 16px; width: 100%;">
+                {% csrf_token %}
+                <textarea rows="3" name="comment" placeholder="Write a comment..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+                <br>
+                <button type="submit" style="margin-top: 8px; background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 8px;">Comment</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

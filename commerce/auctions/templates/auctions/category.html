@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    <h2>Categories</h2>
+
+    {% for category in categories %}
+        <a href="{% url 'allocate' category.name %}" style="text-decoration: none; color: inherit;">
+            <div style="display: flex; border: 1px solid #ccc; padding: 20px; margin: 10px;">
+                <div>
+                    <h3>{{ category.name }}</h3>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock %}
