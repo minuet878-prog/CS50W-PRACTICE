@@ -1,0 +1,28 @@
+.card-box {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.post-author {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 4px;
+    text-decoration: none; 
+    color: inherit;
+}
+
+.post-time {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
