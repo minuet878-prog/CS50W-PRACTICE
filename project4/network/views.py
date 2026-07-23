@@ -3,14 +3,19 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 from .models import User, Post
 
 
 def index(request):
     if request.method == "GET":
+        posts = Post.objects.order_by("-post_time")
+        paginator = Paginator(posts, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         return render(request, "network/index.html", {
-            "posts": Post.objects.order_by("-post_time")
+            "posts": page_obj
         })
     if request.method == "POST":
         content = request.POST.get("content")
@@ -95,6 +100,18 @@ def follow(request, user_id):
     else:
         request.user.follow.remove(profile_user)
     return HttpResponseRedirect(reverse("profile", args=[user_id]))
+
+
+def following(request):
+    if request.method == "GET":
+        posts = Post.objects.order_by("-post_time").filter(poster__in=request.user.follow.all())
+        paginator = Paginator(posts, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, "network/following.html", {
+            "posts": page_obj
+        })
+
 
 
 

@@ -1,17 +1,7 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    {% if user.is_authenticated %}
-    <h2 style="padding:10px;">All Posts</h2>
-    <div class="card-box">
-        <form action="{% url 'index' %}" method="post">
-            {% csrf_token %}
-            <p><strong style="font-size: 20px;">New Post</strong></p>
-            <textarea rows="4" cols="20" name="content" placeholder="How are you feeling today?"></textarea>
-            <input class="btn btn-primary" type="submit" value="post">
-        </form>
-    </div>
-    {% endif %}
+    <h2 style="padding:10px;">Following</h2>
     {% for post in posts %}
         <div class="card-box">
             <p><a class="post-author" href="{% url 'profile' post.poster.id %}">{{ post.poster }}</a></p>
@@ -29,6 +19,4 @@
             <a class="btn btn-primary" href="?page={{ posts.next_page_number }}">Next</a>
         {% endif %}
     </div>
-
-
 {% endblock %}
