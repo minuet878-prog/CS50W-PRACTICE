@@ -86,3 +86,17 @@ def profile(request, user_id):
         "posts": posts,
         "profile_user": user
     })
+
+
+def follow(request, user_id):
+    profile_user = User.objects.get(pk=user_id)
+    if profile_user not in request.user.follow.all():
+        request.user.follow.add(profile_user)
+    else:
+        request.user.follow.remove(profile_user)
+    return HttpResponseRedirect(reverse("profile", args=[user_id]))
+
+
+
+
+
