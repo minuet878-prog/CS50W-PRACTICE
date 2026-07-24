@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.core.paginator import Paginator
@@ -112,6 +112,14 @@ def following(request):
             "posts": page_obj
         })
 
+
+def like(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    if post not in request.user.like_posts.all():
+        request.user.like_posts.add(post)
+    else:
+        request.user.like_posts.remove(post)
+    return JsonResponse({"likes": post.like.count()})
 
 
 

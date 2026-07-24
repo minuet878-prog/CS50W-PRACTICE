@@ -14,11 +14,15 @@
     {% endif %}
     {% for post in posts %}
         <div class="card-box">
-            <p><a class="post-author" href="{% url 'profile' post.poster.id %}">{{ post.poster }}</a></p>
-            <a href="{% url 'edit' %}">edit</a>
-            <p>{{ post.content }}</p>
+            <div class="post-header">
+                <a class="post-author" href="{% url 'profile' post.poster.id %}">{{ post.poster }}</a>
+                <a class="edit-link" href="{% url 'edit' %}">Edit</a>
+            </div>
+            <p class="post-content">{{ post.content }}</p>
             <p class="post-time">{{ post.post_time }}</p>
-            <p>{{ post.like.count }}</p>
+            <button class="like-btn" data-post-id="{{ post.id }}">
+                ❤️ <span id="like-count-{{ post.id }}">{{ post.like.count }}</span>
+            </button>
         </div>
     {% endfor %}
     <div style="padding: 20px; text-align: center;">

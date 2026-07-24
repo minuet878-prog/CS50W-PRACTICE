@@ -1,22 +1,46 @@
 .card-box {
-    border: 1px solid #dee2e6;
-    border-radius: 6px;
-    padding: 20px;
-    margin-bottom: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
     background-color: white;
 }
 
-.post-author {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 4px;
-    text-decoration: none; 
-    color: inherit;
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
-.post-time {
-    color: #6c757d;
+.post-author {
+    font-weight: 600;
+    font-size: 17px;
+    text-decoration: none;
+    color: #111;
+}
+
+.edit-link {
     font-size: 14px;
+    text-decoration: none;
+}
+
+.post-content {
+    font-size: 16px;
+    margin-bottom: 8px;
+    white-space: pre-wrap;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px 0;
+}
+
+.like-btn:hover {
+    opacity: 0.7;
 }
 
 textarea {
